@@ -17,25 +17,28 @@ export default function Cursor() {
       );
     };
     const onDown = () => { pressing.current = true; };
-    const onUp   = () => { pressing.current = false; };
+    const onUp = () => { pressing.current = false; };
     const onLeave = () => { pos.current = { x: -200, y: -200 }; };
 
     const animate = () => {
-      const dot  = dotRef.current;
+      const dot = dotRef.current;
       if (dot) {
-        dot.style.transform  = `translate(${pos.current.x}px,${pos.current.y}px) translate(-50%,-50%)`;
+        dot.style.transform = `translate(${pos.current.x}px,${pos.current.y}px) translate(-50%,-50%) rotate(45deg)`;
 
         const h = hovering.current;
         const p = pressing.current;
 
         if (p) {
-          dot.style.width  = dot.style.height  = "4px";
-          dot.style.opacity = "0.6";
+          dot.style.width = "6px";
+          dot.style.height = "6px";
+          dot.style.opacity = "0.9";
         } else if (h) {
-          dot.style.width  = dot.style.height  = "8px";
-          dot.style.opacity = "0.4";
+          dot.style.width = "18px";
+          dot.style.height = "18px";
+          dot.style.opacity = "0.8";
         } else {
-          dot.style.width  = dot.style.height  = "10px";
+          dot.style.width = "14px";
+          dot.style.height = "14px";
           dot.style.opacity = "1";
         }
       }
@@ -44,14 +47,14 @@ export default function Cursor() {
 
     document.addEventListener("mousemove", onMove);
     document.addEventListener("mousedown", onDown);
-    document.addEventListener("mouseup",   onUp);
+    document.addEventListener("mouseup", onUp);
     document.addEventListener("mouseleave", onLeave);
     rafId.current = requestAnimationFrame(animate);
 
     return () => {
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("mouseup",   onUp);
+      document.removeEventListener("mouseup", onUp);
       document.removeEventListener("mouseleave", onLeave);
       cancelAnimationFrame(rafId.current);
     };
@@ -61,16 +64,21 @@ export default function Cursor() {
     <>
       <style>{`* { cursor: none !important; }`}</style>
 
-      {/* Dot */}
       <div
         ref={dotRef}
         style={{
-          position: "fixed", top: 0, left: 0,
-          width: 10, height: 10, borderRadius: "50%",
-          background: "white", pointerEvents: "none",
-          zIndex: 99999, willChange: "transform",
-          mixBlendMode: "difference",
-          transition: "width .18s ease, height .18s ease, opacity .18s ease",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: 14,
+          height: 14,
+          borderRadius: "3px",
+          background: "#FF6A00",
+          boxShadow: "0 0 18px rgba(255, 106, 0, 0.8)",
+          pointerEvents: "none",
+          zIndex: 99999,
+          willChange: "transform",
+          transition: "width 0.18s ease, height 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease",
         }}
       />
     </>
