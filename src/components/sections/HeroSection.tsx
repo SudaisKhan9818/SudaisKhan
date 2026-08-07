@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity */
 "use client";
 
 import { useRef, useMemo, useEffect, useState, Suspense } from "react";
@@ -11,8 +12,7 @@ import myImage from "../../assests/MyImgae-Photoroom.png";
 //  CONSTANTS
 // ─────────────────────────────────────────────────────────────
 const COUNT = 50;
-const TICKER_TEXT =
-  "Creative Developer · UI/UX Designer · WebGL · Three.js · React · Next.js · Motion Design · ";
+
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%";
 
 // ─────────────────────────────────────────────────────────────
@@ -179,11 +179,11 @@ function ParticleField({ mouse }: { mouse: React.MutableRefObject<[number, numbe
 function FloatingSquares() {
   const squares = useMemo(
     () =>
-      Array.from({ length: 4 }, (_, i) => {
-        // Enlarge the elements specifically requested by the user
-        const sizes = [2.2, 1.6, 1.2, 0.85];
+      Array.from({ length: 7 }, (_, i) => {
+        // Add more squares as requested - 3 more rows
+        const sizes = [2.2, 1.6, 1.2, 0.85, 0.6, 0.45, 0.3];
         return {
-          pos: [(Math.random() - 0.5) * 12, (Math.random() - 0.5) * 7.5, -0.5 - Math.random() * 4] as [number, number, number],
+          pos: [(Math.random() - 0.5) * 14, (Math.random() - 0.5) * 9, -0.5 - Math.random() * 5] as [number, number, number],
           size: sizes[i] || 0.2,
           speed: 0.02 + Math.random() * 0.03,
           rotIntensity: 0.2 + Math.random() * 0.3,
@@ -279,8 +279,7 @@ export default function HeroSection() {
     "Cloud Services."
   ], 80, 40, 2000);
 
-  const IMG_W = 600;
-  const IMG_H = 800;
+
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
@@ -302,7 +301,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative h-screen min-h-[700px] w-full flex flex-col bg-black overflow-hidden"
+      className="relative h-screen min-h-[700px] w-full flex flex-col bg-[#0A0A0A] overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseLeave={() => { mouse.current = [0, 0]; }}
     >
@@ -312,8 +311,8 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Canvas
           camera={{ position: [0, 0, 5], fov: 60 }}
-          dpr={[1, 1.5]}
-          gl={{ antialias: false, alpha: true }}
+          dpr={1}
+          gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
           style={{ background: "transparent" }}
         >
           <Scene mouse={mouse} />
@@ -325,10 +324,10 @@ export default function HeroSection() {
           Image on LEFT — Text on RIGHT
           (flex-row, full height)
       ══════════════════════════════════════════════════════ */}
-      <div className="relative z-[4] flex-1 flex flex-col xl:flex-row items-center justify-between px-8 md:px-14 gap-8 xl:gap-16 pb-10 pt-2 h-full">
+      <div className="relative z-[4] flex-1 flex flex-col xl:flex-row items-center justify-between px-8 md:px-14 gap-8 xl:gap-16 pb-10 pt-16 xl:pt-10 h-full">
 
         {/* ─── LEFT: Profile Image ─── */}
-        <div className="flex-shrink-0 relative ml-0 xl:ml-20 self-center xl:self-start xl:-mt-8 order-2 xl:order-1 mt-10 md:mt-0 w-full md:w-auto flex justify-center">
+        <div className="flex-shrink-0 relative ml-0 xl:ml-20 self-center xl:self-start order-2 xl:order-1 mt-12 md:mt-6 xl:mt-14 w-full md:w-auto flex justify-center">
 
           {/* Vertical label — far left */}
           <div className="absolute -left-10 top-[40%] -translate-y-1/2 hidden xl:flex flex-col items-center gap-3 z-[5]">
@@ -341,13 +340,16 @@ export default function HeroSection() {
             <span className="w-px h-12 bg-gradient-to-b from-neutral-800 to-transparent" />
           </div>
 
-          {/* Image container without heavy 3D calculations */}
-          <div 
+          {/* Premium glow aura */}
+          <div className="absolute inset-0 -z-[1] rounded-full blur-[100px] opacity-40 bg-gradient-to-br from-[#FF6A00]/70 via-orange-500/30 to-purple-600/20 pointer-events-none animate-pulse" style={{ transform: 'scale(1.4)' }} />
+
+          {/* Image container */}
+          <div
             ref={imageContainerRef}
-            className="relative group w-[75vw] h-[105vw] max-w-[380px] max-h-[520px] sm:w-[380px] sm:h-[520px] xl:w-[500px] xl:h-[700px] 2xl:w-[600px] 2xl:h-[780px]"
+            className="relative group w-[60vw] h-[85vw] max-w-[280px] max-h-[380px] sm:w-[280px] sm:h-[380px] xl:w-[380px] xl:h-[520px] 2xl:w-[440px] 2xl:h-[600px] mt-6 xl:mt-10"
           >
             {/* ─── FRONT SIDE ─── */}
-            <div className="absolute inset-0 pointer-events-none" style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}>
+            <div className="absolute inset-0 rounded-2xl overflow-hidden border border-white/20 bg-white/5 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.5)] pointer-events-none" style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}>
               {/* Outer border (optional subtlety) */}
               <div
                 className="absolute pointer-events-none z-[2]"
@@ -355,16 +357,16 @@ export default function HeroSection() {
               />
 
               {/* Remarkable Tile Background */}
-              <div 
-                className="absolute inset-0 z-[0] grid grid-cols-6 md:grid-cols-8 grid-rows-8 gap-[2px] opacity-90 p-1 bg-black"
+              <div
+                className="absolute inset-0 z-[0] grid grid-cols-6 md:grid-cols-8 grid-rows-8 gap-[2px] opacity-90 p-1 bg-[#0A0A0A]/50"
                 style={{
                   maskImage: "linear-gradient(135deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,1) 100%)",
                   WebkitMaskImage: "linear-gradient(135deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,1) 100%)"
                 }}
               >
                 {Array.from({ length: 64 }).map((_, i) => (
-                  <div 
-                    key={`front-tile-${i}`} 
+                  <div
+                    key={`front-tile-${i}`}
                     className="w-full h-full bg-gradient-to-tr from-[#0a0a0a] to-[#1a1a1a] rounded-[2px] border border-white/[0.03] shadow-[inset_0_1px_2px_rgba(255,255,255,0.02)] transition-all duration-500 ease-out hover:opacity-100 hover:from-neutral-700 hover:to-neutral-600 hover:scale-105 cursor-default"
                   />
                 ))}
@@ -455,7 +457,7 @@ export default function HeroSection() {
                 paddingTop: "2px",
                 fontFamily: "var(--font-bebas, 'Bebas Neue', sans-serif)",
                 color: "transparent",
-                WebkitTextStroke: "2px rgba(255,255,255,0.32)",
+                WebkitTextStroke: "2px #FF6A00",
               }}
             >
               {lastName}
@@ -488,7 +490,7 @@ export default function HeroSection() {
 
           {/* Tagline / Typewriter */}
           <p
-            className="text-[16px] xl:text-[20px] leading-[1.8] text-[#00FFD1] font-mono tracking-widest text-center xl:text-right w-full mb-8 h-8 xl:mr-16"
+            className="text-[16px] xl:text-[20px] leading-[1.8] text-[#FF6A00] font-mono tracking-widest text-center xl:text-right w-full mb-8 h-8 xl:mr-16 drop-shadow-[0_0_8px_rgba(255,106,0,0.4)]"
             style={{
               opacity: mounted ? 1 : 0,
               transition: "opacity 0.9s ease 0.3s",
@@ -499,7 +501,7 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <div
-            className="flex items-center justify-center xl:justify-end gap-6 w-full"
+            className="flex items-center justify-center xl:justify-end gap-8 w-full"
             style={{
               opacity: mounted ? 1 : 0,
               transition: "opacity 0.7s ease 0.38s",
@@ -511,8 +513,8 @@ export default function HeroSection() {
             >
               <span className="w-6 h-px bg-white/40"></span>
               <span className="relative flex items-center justify-center">
-                 <span className="animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite] absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
-                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.8)]"></span>
+                <span className="animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite] absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.8)]"></span>
               </span>
               <span className="drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">Contact</span>
             </a>
@@ -541,14 +543,46 @@ export default function HeroSection() {
         Scroll
       </div>
 
-      {/* ── Scrolling ticker ── */}
-      <div className="relative z-[5] border-t border-white/[0.05] overflow-hidden">
-        <div className="flex" style={{ animation: "heroTicker 32s linear infinite" }}>
-          {[0, 1, 2, 3].map((k) => (
-            <span key={k} className="font-mono text-[8px] tracking-[0.35em] uppercase text-white/40 whitespace-nowrap py-3 px-6 flex-shrink-0">
-              {TICKER_TEXT}
-            </span>
-          ))}
+      {/* ── LeetCode Style Performance Grid (Static Dispersion) ── */}
+      <div className="relative z-[5] border-t border-white/[0.05] py-5 px-4 w-full flex justify-center overflow-hidden bg-[#0A0A0A]">
+        <div
+          className="grid grid-rows-5 grid-flow-col gap-[6px] opacity-90 transition-opacity duration-500 hover:opacity-100"
+          style={{
+            maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)"
+          }}
+        >
+          {Array.from({ length: 500 }).map((_, i) => {
+            const col = Math.floor(i / 5);
+            const row = i % 5;
+            const maxCols = 100; // 500 / 5
+
+            // U-shape dispersion: 5 rows at edges, dropping to 1 row in the center
+            const x = (col / maxCols) * 2 - 1; // -1 to 1
+            const maxRows = Math.round(1 + (x * x) * 4); // 5 at edges, 1 in center
+
+            // Generate deterministic pseudo-random layout based on index
+            const val = (Math.sin(i * 13.5) * Math.cos(i * 4.2)) * 10;
+            let color = "bg-[#161b22] border border-white/5";
+
+            if (val > 4) color = "bg-[#FF6A00] border-none";
+            else if (val > 0) color = "bg-[#FF6A00]/80 border-none";
+            else if (val > -3) color = "bg-[#FF6A00]/50 border-none";
+            else if (val > -5) color = "bg-[#FF6A00]/20 border-none";
+
+            const isVisible = row < maxRows || (row >= maxRows && val > 4); // slight scatter
+            if (!isVisible) {
+              return <div key={i} className="w-[8px] h-[8px] md:w-[10px] md:h-[10px] opacity-0 pointer-events-none" />;
+            }
+
+            return (
+              <div
+                key={i}
+                className={`w-[8px] h-[8px] md:w-[10px] md:h-[10px] rounded-none ${color}`}
+                style={{ borderRadius: 0 }}
+              />
+            );
+          })}
         </div>
       </div>
 

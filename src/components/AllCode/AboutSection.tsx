@@ -9,6 +9,7 @@
 //    transpilePackages: ['three', '@react-three/fiber', '@react-three/drei']
 // ============================================================
 
+/* eslint-disable */
 "use client";
 
 import { useRef, useMemo, useEffect, useState, Suspense } from "react";

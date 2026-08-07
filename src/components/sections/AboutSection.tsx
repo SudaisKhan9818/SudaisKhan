@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity */
 // ============================================================
 //  AboutSection.tsx  —  Scroll-animated text + 3D Carousel
 // ============================================================
@@ -20,7 +21,7 @@ const SKILLS = [
   { name: "WebGL", icon: "◆" },
 ];
 
-const COUNT = 150;
+const COUNT = 75;
 
 // ── custom scroll-in hook (no framer-motion needed) ──────────
 function useInView(threshold = 0.15) {
@@ -214,11 +215,49 @@ function SkillCard({ skill, index, total }: { skill: { name: string; icon: strin
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`${styles.revolvingCardInner} ${isHovered ? styles.hovered : ""}`}>
+      <div
+        className={`${styles.revolvingCardInner} ${isHovered ? styles.hovered : ""}`}
+        style={{
+          boxShadow: isHovered
+            ? "0 0 60px rgba(255,106,0,0.2), 0 20px 40px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,106,0,0.15)"
+            : "0 20px 40px rgba(0,0,0,0.7)",
+          borderColor: isHovered ? "rgba(255,106,0,0.3)" : "rgba(255,255,255,0.08)",
+          transition: "box-shadow 0.5s ease, border-color 0.4s ease",
+        }}
+      >
         <div className={styles.skillCardShine} />
         <div className={styles.skillCardEdge} />
-        <span className={styles.skillIcon}>{skill.icon}</span>
-        <span className={styles.skillName}>{skill.name}</span>
+        <span
+          className={styles.skillIcon}
+          style={{
+            filter: isHovered
+              ? "drop-shadow(0 0 16px rgba(255,106,0,0.5))"
+              : "drop-shadow(0 4px 12px rgba(0,0,0,0.5))",
+            transition: "filter 0.4s ease",
+          }}
+        >
+          {skill.icon}
+        </span>
+        <span
+          className={styles.skillName}
+          style={{
+            color: isHovered ? "#ffffff" : "rgba(255,255,255,0.5)",
+            textShadow: isHovered ? "0 0 12px rgba(255,106,0,0.4)" : "none",
+          }}
+        >
+          {skill.name}
+        </span>
+        {/* Skill tag badge */}
+        <span
+          className="font-mono text-[8px] tracking-[0.2em] uppercase px-2 py-0.5 rounded-full transition-all duration-400"
+          style={{
+            background: isHovered ? "rgba(255,106,0,0.15)" : "rgba(255,255,255,0.04)",
+            border: isHovered ? "1px solid rgba(255,106,0,0.25)" : "1px solid rgba(255,255,255,0.06)",
+            color: isHovered ? "#FF6A00" : "rgba(255,255,255,0.2)",
+          }}
+        >
+          Skill
+        </span>
       </div>
     </div>
   );
@@ -287,7 +326,7 @@ export default function AboutSection() {
       <div ref={canvasWrapRef} className={styles.canvasWrap} aria-hidden="true">
         <Canvas
           camera={{ position: [0, 0, 5], fov: 60 }}
-          dpr={[1, 1.5]}
+          dpr={1}
           gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
           style={{ background: "transparent" }}
         >

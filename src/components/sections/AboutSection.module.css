@@ -6,7 +6,7 @@
 .about {
   position: relative;
   background: var(--black);
-  padding-bottom: 140px !important;
+  padding: clamp(100px, 10vw, 140px) clamp(20px, 4vw, 40px) clamp(60px, 8vw, 90px) !important;
   overflow: hidden;
 }
 
@@ -32,9 +32,10 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center; /* Align items to center to balance the tall carousel */
-  margin-top: 8px;
+  gap: clamp(44px, 5vw, 88px);
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 /* ── Left column ────────────────────────────────────────────── */
@@ -84,22 +85,23 @@
 /* ── Revolving Door 3D Carousel Scene ──────────────────────── */
 .carouselScene {
   position: relative;
-  width: 100%;
-  height: 500px;
+  width: min(100%, 340px);
+  height: 440px;
+  margin-inline: auto;
+  margin-right: 0;
   perspective: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(-20px);
-  --carousel-radius: 280px;
+  transform: translateY(-10px);
+  --carousel-radius: 240px;
 }
 
 .carouselInteractive {
   position: relative;
-  width: 260px;
-  height: 340px;
+  width: 200px;
+  height: 280px;
   transform-style: preserve-3d;
-  /* Hardware acceleration for crisp drag */
   will-change: transform;
 }
 
@@ -211,6 +213,15 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
+@media (min-width: 1280px) {
+  .about {
+    padding-right: clamp(80px, 10vw, 120px) !important;
+  }
+  .carouselScene {
+    --carousel-radius: 220px;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr;
@@ -218,26 +229,29 @@
   }
   .carouselScene {
     height: 480px;
-    --carousel-radius: 220px;
+    --carousel-radius: 200px;
+    margin-inline: auto;
   }
   .carouselInteractive {
-    width: 200px;
-    height: 260px;
+    width: 180px;
+    height: 240px;
   }
 }
 
 @media (max-width: 768px) {
   .about {
     padding-bottom: 80px !important;
+    padding-right: clamp(20px, 4vw, 40px) !important;
   }
   .carouselScene {
     transform: scale(0.85) translateY(-10px);
     height: 380px;
-    perspective: 1000px; /* Reduce perspective mapping for mobile */
-    --carousel-radius: 140px;
+    perspective: 1000px;
+    --carousel-radius: 120px;
+    margin-inline: auto;
   }
   .carouselInteractive {
-    width: 160px;
-    height: 220px;
+    width: 140px;
+    height: 200px;
   }
 }

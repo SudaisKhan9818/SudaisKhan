@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import styles from "./ContactSection.module.css";
 import { useForm } from "@formspree/react";
@@ -97,7 +97,7 @@ export default function ContactSection() {
                 </div>
                 <h3 className="font-[family-name:var(--font-bebas)] text-4xl tracking-widest mb-3 text-white">MESSAGE SENT</h3>
                 <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-neutral-400">
-                  Thanks for reaching out! I'll be in touch soon.
+                  Thanks for reaching out! I&apos;ll be in touch soon.
                 </p>
               </div>
             ) : (
@@ -132,34 +132,6 @@ export default function ContactSection() {
         </div>
       </div>
 
-      {/* ── PREMIUM FOOTER ── */}
-      <footer className={styles.footer}>
-        <div className={styles.footerTop}>
-          <div className={styles.footerBrand}>
-            <span className={styles.footerName}>SUDAIS KHAN</span>
-            <span className={styles.footerTagline}>Creative Developer &amp; Designer</span>
-          </div>
-          <nav className={styles.footerNav} aria-label="Footer navigation">
-            {["hero", "projects", "about", "contact"].map((id) => (
-              <a key={id} href={`#${id}`} className={styles.footerNavLink}>
-                {id.charAt(0).toUpperCase() + id.slice(1)}
-              </a>
-            ))}
-          </nav>
-          <div className={styles.footerSocials}>
-            {SOCIALS.map((s) => (
-              <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className={styles.footerSocialLink}>{s.name}</a>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.footerDivider} />
-
-        <div className={styles.footerBottom}>
-          <span>© 2025 Sudais Khan — All rights reserved</span>
-          <span className={styles.footerBuilt}>Designed &amp; Built with precision</span>
-        </div>
-      </footer>
     </section>
   );
 }

@@ -7,7 +7,7 @@
   position: relative;
   background: var(--black);
   color: var(--white);
-  padding: 120px 80px 0;
+  padding: 120px clamp(40px, 6vw, 80px) 180px;
   overflow: hidden;
 }
 
@@ -51,7 +51,7 @@
 .containerGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 100px;
+  gap: clamp(40px, 6vw, 100px);
   align-items: start;
 }
 
@@ -159,8 +159,9 @@ a.infoValue:hover {
 .socialRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   margin-top: 28px;
+  margin-bottom: 40px;
 }
 
 .socialBtn {
@@ -171,7 +172,7 @@ a.infoValue:hover {
   color: var(--black);
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 14px 28px;
+  padding: 13px 24px;
   text-decoration: none;
   border-radius: 100px;
   position: relative;
@@ -218,6 +219,7 @@ a.infoValue:hover {
 
 /* ── RIGHT COLUMN / FORM ───────────────────────────────────── */
 .rightCol {
+  margin-top: 10px;
   background: rgba(255, 255, 255, 0.055);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
@@ -455,6 +457,10 @@ a.infoValue:hover {
 
   .footerTop {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .socialRow {
+    flex-wrap: wrap;
   }
 }
 
