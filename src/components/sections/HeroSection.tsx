@@ -508,15 +508,16 @@ export default function HeroSection() {
             }}
           >
             <a
-              href="#contact"
-              className="inline-flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-white no-underline transition-all duration-300 hover:scale-105"
+              href="/assests/MY%20RESUME.pdf"
+              download
+              className="inline-flex items-center gap-3 border border-[#FF6A00] bg-[#FF6A00] px-6 py-3.5 font-mono text-[10px] tracking-[0.22em] uppercase text-black no-underline shadow-[0_0_25px_rgba(255,106,0,0.35)] transition-all duration-300 hover:scale-105"
             >
-              <span className="w-6 h-px bg-white/40"></span>
+              <span className="w-6 h-px bg-black/60"></span>
               <span className="relative flex items-center justify-center">
-                <span className="animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite] absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.8)]"></span>
+                <span className="animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite] absolute inline-flex h-2 w-2 rounded-full bg-black opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-black shadow-[0_0_8px_2px_rgba(0,0,0,0.8)]"></span>
               </span>
-              <span className="drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">Contact</span>
+              <span className="drop-shadow-[0_0_5px_rgba(255,106,0,0.3)]">Download Resume</span>
             </a>
 
             <a

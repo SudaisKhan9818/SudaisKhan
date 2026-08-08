@@ -269,7 +269,7 @@ export default function ProjectsSection() {
                           </div>
 
                           <div>
-                            <h3 className="mb-3 font-bebas text-3xl tracking-wide text-white transition-colors duration-300 group-hover:text-[#FF6A00] sm:text-4xl">
+                            <h3 className="mb-3 font-bebas text-[2rem] leading-[0.9] tracking-wide text-white transition-colors duration-300 group-hover:text-[#FF6A00] sm:text-4xl">
                               {project.title}
                             </h3>
                             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#FF6A00]/70">
