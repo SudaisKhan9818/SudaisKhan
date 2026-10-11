@@ -402,7 +402,7 @@ a:focus-visible {
   width: 100%;
   margin: 0;
   font-family: var(--font-bebas), "Arial Narrow", sans-serif;
-  font-size: clamp(7.5rem, 22vw, 22rem);
+  font-size: clamp(6rem, 17vw, 17rem);
   font-weight: 400;
   letter-spacing: 0.055em;
   line-height: 0.76;
@@ -929,7 +929,7 @@ a:focus-visible {
 
 @media (max-width: 1024px) {
   .hero-title {
-    font-size: 17vw;
+    font-size: 14vw;
   }
 
   .project-row__link {
@@ -953,7 +953,7 @@ a:focus-visible {
   }
 
   .hero-title {
-    font-size: 19vw;
+    font-size: 16vw;
   }
 
   .hero-skills {
@@ -1071,7 +1071,7 @@ a:focus-visible {
   }
 
   .hero-title {
-    font-size: 20vw;
+    font-size: 17vw;
   }
 
   .hero-portrait {
