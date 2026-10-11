@@ -59,4 +59,16 @@ export const PROJECTS: Project[] = [
     image: "/assests/Supplier.png",
     url: "https://supplier-platform-beta.vercel.app/",
   },
+  {
+    id: "propverse-town",
+    number: "05",
+    title: "PropVerse Town",
+    subtitle: "3D Digital Twin & IoT Town",
+    description:
+      "An explorable 3D town built from Blender-authored GLB houses, modular streets, and a complete spatial neighborhood view. Visitors can move through the environment, enter the Twin IoT Model, and experience a foundation for property intelligence, simulation, and connected city data.",
+    tech: "R3F · Three.js · Blender GLB · React · IoT",
+    tags: ["3D", "Digital Twin", "IoT", "WebGL"],
+    image: "/assests/propverse-town.png",
+    url: "https://town-propverse.vercel.app/",
+  },
 ];

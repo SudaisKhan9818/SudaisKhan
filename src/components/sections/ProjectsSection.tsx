@@ -120,13 +120,22 @@ export default function ProjectsSection() {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const rotation = useRef(0);
+  const frameRef = useRef<number | null>(null);
   const isDragging = useRef(false);
   const isHovered = useRef(false);
   const startY = useRef(0);
   const currentY = useRef(0);
 
   useEffect(() => {
-    let id: number;
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const stop = () => {
+      if (frameRef.current === null) return;
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    };
+
     const tick = () => {
       if (!isDragging.current && !isHovered.current) {
         rotation.current -= 0.4; // Increased vertical rotation speed
@@ -134,10 +143,25 @@ export default function ProjectsSection() {
       if (carouselRef.current) {
         carouselRef.current.style.transform = `rotateX(${rotation.current}deg)`;
       }
-      id = requestAnimationFrame(tick);
+      frameRef.current = requestAnimationFrame(tick);
     };
-    tick();
-    return () => cancelAnimationFrame(id);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (frameRef.current === null) tick();
+        } else {
+          stop();
+        }
+      },
+      { rootMargin: "240px" },
+    );
+
+    observer.observe(section);
+    return () => {
+      stop();
+      observer.disconnect();
+    };
   }, []);
 
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -254,6 +278,7 @@ export default function ProjectsSection() {
                               fill
                               className="object-contain p-4 transition-transform duration-700 group-hover:scale-105 sm:p-6"
                               sizes="(max-width: 768px) 90vw, 500px"
+                              loading="lazy"
                             />
                           </div>
                         </div>

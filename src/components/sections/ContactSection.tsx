@@ -8,8 +8,8 @@ import { useForm } from "@formspree/react";
 const SOCIALS = [
   { name: "GitHub", url: "https://github.com/SudaisKhattakllc" },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/sudais-khan-876570383/" },
-  { name: "Twitter", url: "https://x.com/SudaisKhattak__" },
-  { name: "FACEBOOK", url: "https://web.facebook.com/GWMGeraldAlpha/" }
+  { name: "Twitter", url: "https://x.com/SudaisKhan54874" },
+  { name: "FACEBOOK", url: "https://web.facebook.com/profile.php?id=61595061932766" }
 ];
 
 const INFO = [
